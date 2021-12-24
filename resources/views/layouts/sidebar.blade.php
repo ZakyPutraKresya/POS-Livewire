@@ -40,7 +40,7 @@
                             <hr class="mb-0 navbar-vertical-divider" />
                         </div>
                     </div>
-                    <!-- parent pages--><a class="nav-link dropdown-indicator" href="#product" role="button"
+                    <a class="nav-link dropdown-indicator" href="#product" role="button"
                         data-bs-toggle="collapse" aria-expanded="false" aria-controls="Produk">
                         <div class="d-flex align-items-center"><span class="nav-link-icon"><span
                                     class="fas fa-shopping-bag"></span></span><span
@@ -49,20 +49,29 @@
                     </a>
                     <ul class="nav collapse {{ (request()->is('admin/product*')) ? 'show' : 'false' }}" id="product">
                         <li class="nav-item"><a class="nav-link {{ (request()->is('admin/product*')) ? 'active' : '' }}" href="{{route('product.index')}}" aria-expanded="false">
-                                <div class="d-flex align-items-center"><span class="nav-link-text ps-1">List Produk</span>
+                                <div class="d-flex align-items-center"><span class="nav-link-text ps-1">List Data</span>
                                 </div>
                             </a>
                             <!-- more inner pages-->
                         </li>
-                        <li class="nav-item"><a class="nav-link {{ (request()->is('admin/category')) ? 'active' : '' }}" href="{{route('category.index')}}"
-                                aria-expanded="false">
-                                <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Kategori</span>
-                                </div>
-                            </a>
-                            <!-- more inner pages-->
-                        </li>
-                        <li class="nav-item"><a class="nav-link {{ (request()->is('admin/stock*')) ? 'active' : '' }}" href="{{route('product.stock')}}" aria-expanded="false">
+                        <li class="nav-item"><a class="nav-link {{ (request()->is('admin/stock')) ? 'active' : '' }}" href="{{route('product.stock')}}" aria-expanded="false">
                                 <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Penyesuaian Stok</span>
+                                </div>
+                            </a>
+                            <!-- more inner pages-->
+                        </li>
+                    </ul>
+                    <a class="nav-link dropdown-indicator" href="#category" role="button"
+                        data-bs-toggle="collapse" aria-expanded="false" aria-controls="Category">
+                        <div class="d-flex align-items-center"><span class="nav-link-icon"><span
+                                    class="fas fa-shopping-bag"></span></span><span
+                                class="nav-link-text ps-1">Kategori</span>
+                        </div>
+                    </a>
+                    <ul class="nav collapse {{ (request()->is('product/category*')) ? 'show' : 'false' }}" id="category">
+                        <li class="nav-item"><a class="nav-link {{ (request()->is('product/category')) ? 'active' : '' }}" href="{{route('category.index')}}"
+                                aria-expanded="false">
+                                <div class="d-flex align-items-center"><span class="nav-link-text ps-1">List Data</span>
                                 </div>
                             </a>
                             <!-- more inner pages-->

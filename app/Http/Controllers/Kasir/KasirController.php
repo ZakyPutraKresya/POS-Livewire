@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Product;
+namespace App\Http\Controllers\Kasir;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Category;
+use App\Models\Product;
+use Session;
 use Alert;
 
-class CategoryController extends Controller
+class KasirController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +17,10 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $data = Category::all();
-
-        return view('admin.product.category.index', compact('data'));
+        
+        $cart = session('cart');
+        $data = Product::orderBy('nama', 'asc')->get();
+        return view('kasir.index', compact('data'))->with('cart', $cart);
     }
 
     /**
@@ -39,23 +41,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'kategori' => 'required'
-        ]);
-
-        $tambahdata = Category::create(
-            [
-                'kategori' => $request->kategori
-            ]
-        );
-
-        if ($tambahdata){
-            Alert::success('Berhasil', 'Data Category Berhasil Ditambahkan');
-            return redirect()->route('category.index');
-        } else {
-            Alert::error('Gagal', 'Data Category Gagal Ditambahkan');
-            return redirect()->route('category.index');
-        }
+        //
     }
 
     /**
@@ -100,9 +86,27 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $category = Category::findorfail($id);
-        $category->delete();
-        Alert::success('Berhasil', 'Data Produk Berhasil Dihapus');
-        return redirect()->route('category.index');
+        //
+    }
+
+    public function tambah_cart($id){
+        
+        $product = Product::findOrFail($id);
+          
+        $cart = session()->get('cart', []);
+  
+        if(isset($cart[$id])) {
+            $cart[$id]['quantity']++;
+        } else {
+            $cart[$id] = [
+                "nama" => $product->nama,
+                "quantity" => 1,
+                "harga" => $product->harga
+            ];
+        }
+          
+        session()->put('cart', $cart);
+        Alert::success('Berhasil', 'Data Dimasukkan Keranjang');
+        return redirect()->back();
     }
 }

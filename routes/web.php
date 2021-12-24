@@ -1,7 +1,9 @@
 <?php
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Kasir\KasirController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\Product\ProductController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\Product\CategoryController;
 use App\Http\Controllers\Admin\Product\StockController;
 
@@ -32,6 +34,9 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/', function () {
         return redirect()->route('home');
     });
+
+    Route::get('/home/search', [HomeController::class, 'search'])->name('search');
+
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
     // Checkrole Admin
@@ -44,14 +49,16 @@ Route::group(['middleware' => 'auth'], function(){
         
         // Product Resource
         Route::resource('admin/product', ProductController::class);
-        Route::resource('admin/category', CategoryController::class);
-        Route::get('admin/stock', [ProductController::class, 'stock'])->name('product.stock');
+        Route::resource('/product/category', CategoryController::class);
+        Route::get('/product/stock', [ProductController::class, 'stock'])->name('product.stock');
         // Route::get('admin/product/truncate', [ProductController::class, 'truncate'])->name('product.truncate');
        
     });
+
     Route::middleware(['checkRole:kasir'])->group(function () {
         // Jika sudah login ingin kembali ke halaman login dan regis
-        
+        Route::resource('kasir', KasirController::class);
+        Route::get('/kasir/tambah/{id}', [KasirController::class, 'tambah_cart'])->name('tambah.cart');
 
         // Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
 

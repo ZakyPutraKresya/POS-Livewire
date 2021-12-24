@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use Illuminate\Http\Request;
 use App\Models\Product;
 
@@ -24,8 +25,23 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $data = Product::where('stok', ">=", '1')->get();
-        return view('home');
+        if(Auth::user()->role == 'kasir'){
+            $cart = session('cart');
+            $data = Product::orderBy('nama', 'asc')->get();
+        return view('home', compact('data'))->with('cart', $cart);
+        } else {
+            $data = Product::orderBy('nama', 'asc')->get();
+            return view('home', compact('data'));
+        }
+        
         
     }
+
+    public function search(Request $request)
+    {
+        $search = $request->get('search');
+        $data = Product::where('nama', 'like', '%'.$search.'%')->orderBy('nama', 'asc')->get();
+        return view('home', compact('data'));
+    }
+
 }

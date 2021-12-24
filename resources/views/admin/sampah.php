@@ -1,125 +1,245 @@
-<form method="POST" action="{{ route('register') }}">
-                        @csrf
 
-                        <div class="row mb-3">
-                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('E-Mail Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                            </div>
-                        </div>
-
-                        <div class="row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
-                                </button>
-                            </div>
-                        </div>
+<!-- ========================= SECTION CONTENT ========================= -->
+<section class="section-content padding-y-sm bg-default ">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8 card padding-y-sm card ">
+                <div class="search-box mb-3" data-list='{"valueNames":["title"]}'>
+                    <form class="position-relative" data-bs-toggle="search" data-bs-display="static" action="/search" method="get">
+                        <input class="form-control search-input fuzzy-search" type="search" name="search" placeholder="Cari Produk..."
+                            aria-label="Search" />
+                        <span class="fas fa-search search-box-icon"></span>
                     </form>
+                    <div class="btn-close-falcon-container position-absolute end-0 top-50 translate-middle shadow-none"
+                        data-bs-dismiss="search">
+                        <div class="btn-close-falcon" aria-label="Close"></div>
+                    </div>
 
+                </div>
+                <span id="items">
+                    <div class="row">
+                        @foreach($data as $dt => $val)
+                        <div class="col-md-4">
+                            <figure class="card card-product" role="tabpanel"
+                                aria-labelledby="tab-dom-55d552bf-cdbd-40f9-856d-410188578fda"
+                                id="dom-55d552bf-cdbd-40f9-856d-410188578fda">
+                                <figcaption class="info-wrap" data-list='{"valueNames":["name","email","age"],"page":5,"pagination":true}'>
+                                    <a href="#" class="title">{{$val->nama}}</a>
+                                    <div class="action-wrap">
+                                        @if($val->stok == 0)
+                                        <button class="btn btn-danger btn-sm float-right" disabled> <i
+                                                class="fas fa-ban"></i> Habis </button>
+                                        @else
+                                        <button class="btn btn-primary btn-sm float-right"> <i
+                                                class="fa fa-cart-plus"></i> Add </button>
+                                        @endif
+                                        <div class="price-wrap h5">
+                                            <span class="price-new">Rp. {{Str::currency($val->harga)}}</span>
+                                        </div> <!-- price-wrap.// -->
 
-
-
-
-
-                    <div class="card-body px-0 py-0">
-            <div class="table-responsive scrollbar">
-                <table class="table table-sm fs--1 mb-0 overflow-hidden">
-                    <thead class="bg-200 text-900">
-
-                        <tr>
-                            <th class="sort pe-1 align-middle white-space-nowrap" data-sort="nama">Nama Produk</th>
-                            <th class="sort pe-1 align-middle white-space-nowrap" data-sort="harga">Harga</th>
-                            <th class="sort pe-1 align-middle white-space-nowrap" data-sort="stok">Stok</th>
-                            <th class="sort pe-1 align-middle white-space-nowrap text-center" data-sort="kategori">
-                                Kategori</th>
-                            <th class="no-sort pe-1 align-middle data-table-row-action"></th>
-                        </tr>
-
-                    </thead>
-                    <tbody class="list" id="table-purchase-body">
-                        @forelse($product as $produk)
-                        <tr class="btn-reveal-trigger">
-                            <th class="align-middle white-space-nowrap nama">{{$produk->nama}}</a></th>
-                            <td class="align-middle white-space-nowrap harga">{{$produk->harga}}</td>
-                            <td class="align-middle white-space-nowrap stok">{{$produk->stok}}</td>
-                            <td class="align-middle text-end kategori">{{$produk->category->kategori}}</td>
-                            <td class="align-middle white-space-nowrap text-end">
-                                <div class="dropstart font-sans-serif position-static d-inline-block">
-                                    <button class="btn btn-link text-600 btn-sm dropdown-toggle btn-reveal float-end"
-                                        type="button" id="dropdown13" data-bs-toggle="dropdown" data-boundary="window"
-                                        aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span
-                                            class="fas fa-ellipsis-h fs--1"></span></button>
-                                    <div class="dropdown-menu dropdown-menu-end border py-2"
-                                        aria-labelledby="dropdown13"><a class="dropdown-item" href="#!">View</a><a
-                                            class="dropdown-item" href="#!">Edit</a>
-                                        <div class="dropdown-divider"></div><a class="dropdown-item text-danger"
-                                            href="#!">Delete</a>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        @empty
-                        <tr class="btn-reveal-trigger">
-                            <th class="align-middle white-space-nowrap nama" colspan="5">
-                                <div class="row g-3 mb-3">
-                                    <div class="col-xxl-9">
-                                        <div class="card bg-light my-3">
-                                            <div class="card-body p-3 text-center">
-                                                <p class="fs--1 mb-0"><span class="fas fa-ban me-2"></span>Data Kosong
-                                                </p>
-                                            </div>
+                                    </div> <!-- action-wrap -->
+                                </figcaption>
+                            </figure> <!-- card // -->
+                        </div> <!-- col // -->
+                        @endforeach
+                    </div> <!-- row.// -->
+                </span>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <span id="cart">
+                        <table class="table table-hover shopping-cart-wrap">
+                            <thead class="text-muted">
+                                <tr>
+                                    <th scope="col">Item</th>
+                                    <th scope="col" width="120">Qty</th>
+                                    <th scope="col" width="120">Price</th>
+                                    <th scope="col" class="text-right" width="200">Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <figure class="media">
+                                            <div class="img-wrap"><img src="{{ asset('assets')}}/images/items/1.jpg"
+                                                    class="img-thumbnail img-xs"></div>
+                                            <figcaption class="media-body">
+                                                <h6 class="title text-truncate">Product name </h6>
+                                            </figcaption>
+                                        </figure>
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="m-btn-group m-btn-group--pill btn-group mr-2" role="group"
+                                            aria-label="...">
+                                            <button type="button" class="m-btn btn btn-default"><i
+                                                    class="fa fa-minus"></i></button>
+                                            <button type="button" class="m-btn btn btn-default" disabled>3</button>
+                                            <button type="button" class="m-btn btn btn-default"><i
+                                                    class="fa fa-plus"></i></button>
                                         </div>
-                                    </div>
-                                </div>
-                            </th>
-                        </tr>
-
-                        @endforelse
-                    </tbody>
-                </table>
+                                    </td>
+                                    <td>
+                                        <div class="price-wrap">
+                                            <var class="price">$145</var>
+                                        </div> <!-- price-wrap .// -->
+                                    </td>
+                                    <td class="text-right">
+                                        <a href="" class="btn btn-outline-danger"> <i class="fa fa-trash"></i></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <figure class="media">
+                                            <div class="img-wrap"><img src="{{ asset('assets')}}/images/items/5.jpg"
+                                                    class="img-thumbnail img-xs"></div>
+                                            <figcaption class="media-body">
+                                                <h6 class="title text-truncate">Product name </h6>
+                                            </figcaption>
+                                        </figure>
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="m-btn-group m-btn-group--pill btn-group mr-2" role="group"
+                                            aria-label="...">
+                                            <button type="button" class="m-btn btn btn-default"><i
+                                                    class="fa fa-minus"></i></button>
+                                            <button type="button" class="m-btn btn btn-default" disabled>1</button>
+                                            <button type="button" class="m-btn btn btn-default"><i
+                                                    class="fa fa-plus"></i></button>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="price-wrap">
+                                            <var class="price">$35</var>
+                                        </div> <!-- price-wrap .// -->
+                                    </td>
+                                    <td class="text-right">
+                                        <a href="" class="btn btn-outline-danger btn-round"> <i
+                                                class="fa fa-trash"></i></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <figure class="media">
+                                            <div class="img-wrap"><img src="{{ asset('assets')}}/images/items/4.jpg"
+                                                    class="img-thumbnail img-xs"></div>
+                                            <figcaption class="media-body">
+                                                <h6 class="title text-truncate">Product name </h6>
+                                            </figcaption>
+                                        </figure>
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="m-btn-group m-btn-group--pill btn-group mr-2" role="group"
+                                            aria-label="...">
+                                            <button type="button" class="m-btn btn btn-default"><i
+                                                    class="fa fa-minus"></i></button>
+                                            <button type="button" class="m-btn btn btn-default" disabled>5</button>
+                                            <button type="button" class="m-btn btn btn-default"><i
+                                                    class="fa fa-plus"></i></button>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="price-wrap">
+                                            <var class="price">$45</var>
+                                        </div> <!-- price-wrap .// -->
+                                    </td>
+                                    <td class="text-right">
+                                        <a href="" class="btn btn-outline-danger btn-round"> <i
+                                                class="fa fa-trash"></i></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <figure class="media">
+                                            <div class="img-wrap"><img src="{{ asset('assets')}}/images/items/2.jpg"
+                                                    class="img-thumbnail img-xs"></div>
+                                            <figcaption class="media-body">
+                                                <h6 class="title text-truncate">Product name </h6>
+                                            </figcaption>
+                                        </figure>
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="m-btn-group m-btn-group--pill btn-group mr-2" role="group"
+                                            aria-label="...">
+                                            <button type="button" class="m-btn btn btn-default"><i
+                                                    class="fa fa-minus"></i></button>
+                                            <button type="button" class="m-btn btn btn-default" disabled>2</button>
+                                            <button type="button" class="m-btn btn btn-default"><i
+                                                    class="fa fa-plus"></i></button>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="price-wrap">
+                                            <var class="price">$45</var>
+                                        </div> <!-- price-wrap .// -->
+                                    </td>
+                                    <td class="text-right">
+                                        <a href="" class="btn btn-outline-danger btn-round"> <i
+                                                class="fa fa-trash"></i></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <figure class="media">
+                                            <div class="img-wrap"><img src="{{ asset('assets')}}/images/items/3.jpg"
+                                                    class="img-thumbnail img-xs"></div>
+                                            <figcaption class="media-body">
+                                                <h6 class="title text-truncate">Product name </h6>
+                                            </figcaption>
+                                        </figure>
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="m-btn-group m-btn-group--pill btn-group mr-2" role="group"
+                                            aria-label="...">
+                                            <button type="button" class="m-btn btn btn-default"><i
+                                                    class="fa fa-minus"></i></button>
+                                            <button type="button" class="m-btn btn btn-default" disabled>1</button>
+                                            <button type="button" class="m-btn btn btn-default"><i
+                                                    class="fa fa-plus"></i></button>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="price-wrap">
+                                            <var class="price">$45</var>
+                                        </div> <!-- price-wrap .// -->
+                                    </td>
+                                    <td class="text-right">
+                                        <a href="" class="btn btn-outline-danger btn-round"> <i
+                                                class="fa fa-trash"></i></a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </span>
+                </div> <!-- card.// -->
+                <div class="box">
+                    <dl class="dlist-align">
+                        <dt>Tax: </dt>
+                        <dd class="text-right">12%</dd>
+                    </dl>
+                    <dl class="dlist-align">
+                        <dt>Discount:</dt>
+                        <dd class="text-right"><a href="#">0%</a></dd>
+                    </dl>
+                    <dl class="dlist-align">
+                        <dt>Sub Total:</dt>
+                        <dd class="text-right">$215</dd>
+                    </dl>
+                    <dl class="dlist-align">
+                        <dt>Total: </dt>
+                        <dd class="text-right h4 b"> $215 </dd>
+                    </dl>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <a href="#" class="btn  btn-default btn-error btn-lg btn-block"><i
+                                    class="fa fa-times-circle "></i> Cancel </a>
+                        </div>
+                        <div class="col-md-6">
+                            <a href="#" class="btn  btn-primary btn-lg btn-block"><i class="fa fa-shopping-bag"></i>
+                                Charge </a>
+                        </div>
+                    </div>
+                </div> <!-- box.// -->
             </div>
         </div>
+    </div><!-- container //  -->
+</section>
