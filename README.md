@@ -9,37 +9,30 @@ Aplikasi POS atau point of sales adalah aplikasi yang digunakan untuk mengelola 
 ### Beberapa Fitur yang tersedia:
 - Manajemen Kategori Produk
 - Manajemen Produk
-  - Multiple Delete
-  - Cetak Barcode
-- Manajemen Member atau Anggota
-  - Cetak Kartu Member
-- Manajemen Supplier
+- Manajemen Customer
+- Manajemen Stok Produk
 - Transaksi Pengeluaran
 - Transaksi Pembelian
 - Transaksi Penjualan
 - Laporan Pendapatan atau Laba & Rugi
   - Bulanan
   - Harian
-  - Custom Tanggal
-- Custom Tipe Nota
-  - Nota Besar
-  - Nota Kecil / Thermal Nota
+  - Mingguan
 - Manajemen User dan Profil
 - Pengaturan Toko
   - Identitas
-  - Upload Desain Kartu Member
-  - Setting Diskon Member
+  - Setting Diskon Produk
 - User (Administrator, Kasir)
 - Grafik ChartJS pada Dashboard
 
 ## Instalasi
 #### Via Git
 ```bash
-git clone https://github.com/sandinur157/tuturial-membuat-aplikasi-point-of-sales.git
+git clone https://github.com/ZakyPutraKresya/RasyPOS
 ```
 
 ### Download ZIP
-[Link](https://github.com/sandinur157/tuturial-membuat-aplikasi-point-of-sales/archive/refs/heads/main.zip)
+[Link](https://github.com/ZakyPutraKresya/RasyPOS/archive/refs/heads/master.zip)
 
 ### Setup Aplikasi
 Jalankan perintah 
@@ -87,12 +80,6 @@ Menjalankan aplikasi
 ```bash
 php artisan serve
 ```
-
-## Link Tutorial
-
-- [Youtube](https://www.youtube.com/playlist?list=PLaN75JfoGz0Okf9f_7GbGM5IFaLXWx-_C)
-- [W2Learn](https://www.w2learn.com)
-
 ## License
 
 [MIT license](https://opensource.org/licenses/MIT)
