@@ -11,6 +11,7 @@ Aplikasi POS atau point of sales adalah aplikasi yang digunakan untuk mengelola 
 - Manajemen Produk
 - Manajemen Customer
 - Manajemen Stok Produk
+- Kasir Interface
 - Transaksi Pengeluaran
 - Transaksi Pembelian
 - Transaksi Penjualan
@@ -23,6 +24,8 @@ Aplikasi POS atau point of sales adalah aplikasi yang digunakan untuk mengelola 
   - Identitas
   - Setting Diskon Produk
 - User (Administrator, Kasir)
+  - Admin Data Master
+  - Kasir (Input Produk > Keranjang, Pembayaran)
 - Grafik ChartJS pada Dashboard
 
 ## Instalasi
