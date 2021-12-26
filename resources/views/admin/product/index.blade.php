@@ -126,7 +126,7 @@ Product
                                                     class="ms-1 fas fa-exclamation-triangle"
                                                     data-fa-transform="shrink-2"></span></span></td>
                                             @endif
-                                            @if($produk->stok >= 10)
+                                            @if($produk->stok > 10)
                                             <td class="align-middle text-center fs-0 white-space-nowrap status"><span
                                                     class="badge badge rounded-pill badge-soft-success"> Stok
                                                     Tersedia<span class="ms-1 fas fa-check"

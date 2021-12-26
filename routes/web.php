@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\Product\ProductController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\Product\CategoryController;
 use App\Http\Controllers\Admin\Product\StockController;
+use App\Http\Livewire\Cart;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,8 +58,15 @@ Route::group(['middleware' => 'auth'], function(){
 
     Route::middleware(['checkRole:kasir'])->group(function () {
         // Jika sudah login ingin kembali ke halaman login dan regis
-        Route::resource('kasir', KasirController::class);
-        Route::get('/kasir/tambah/{id}', [KasirController::class, 'tambah_cart'])->name('tambah.cart');
+        Route::resource('kasir', KasirController::class)->only(['index']);
+        Route::get('/cart', Cart::class);
+        Route::get('/cart/tambah/{id}', [Cart::class, 'tambah_cart'])->name('tambah.cart');
+        Route::get('/kasir/diskon', [KasirController::class, 'tambah_diskon'])->name('tambah.diskon');
+        Route::patch('/kasir/edit/', [KasirController::class, 'edit_cart'])->name('edit.cart');
+        Route::delete('/kasir/hapus', [KasirController::class, 'remove'])->name('remove.from.cart');
+
+        // Route::patch('/kasir/updatePlus', [KasirController::class, 'updatePlus'])->name('update.plus.cart');
+        // Route::patch('/kasir/updateMinus', [KasirController::class, 'updateMinus'])->name('update.minus.cart');
 
         // Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
 

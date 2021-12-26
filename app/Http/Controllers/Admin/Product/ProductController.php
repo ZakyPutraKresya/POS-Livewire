@@ -79,9 +79,9 @@ class ProductController extends Controller
 
         if ($tambahdata){
             Alert::success('Berhasil', 'Data Produk Berhasil Ditambahkan');
-            return redirect()->route('product.index')->with('success', 'Data Product Berhasil Ditambah');
+            return redirect()->route('product.index');
         } else {
-            return redirect()->route('product.index')->with('success', 'Data Product Gagal Ditambah');
+            return redirect()->route('product.index');
         }
         
     }

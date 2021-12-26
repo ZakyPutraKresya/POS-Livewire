@@ -2111,12 +2111,12 @@ ul.row, ul.row-sm {
 
 /* =================  ELEMENTS FOR PRODUCT =================== */
 .badge-new {
-  top: 7px;
-  left: 7px;
+  top: 8px;
+  left: 78%;
   position: absolute;
   display: block;
   z-index: 10;
-  padding: 2px 7px;
+  padding: 2px 10px;
   font-size: 12px;
   background-color: #ef5f5f;
   color: #fff;

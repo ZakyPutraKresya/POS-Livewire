@@ -20,8 +20,6 @@ class CreateProductsTable extends Migration
             $table->integer('harga');
             $table->integer('harga_modal');
             $table->integer('stok');
-            $table->integer('diskon')->nullable()->default(0);
-            $table->enum('tipe_diskon', ['Persentase', 'Rupiah', 'Tanpa Diskon'])->default('Tanpa Diskon');
             $table->enum('jenis', ['Satuan', 'Kilogram', 'Dus']);
             $table->timestamps();
 

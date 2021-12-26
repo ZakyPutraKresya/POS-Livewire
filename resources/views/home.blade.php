@@ -1,5 +1,5 @@
 @if (Auth::user()->role == 'admin')
 @include('admin.index')
 @else
-@include('kasir.index')
+<script>window.location = "/cart";</script>
 @endif
