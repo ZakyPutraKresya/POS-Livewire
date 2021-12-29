@@ -17,14 +17,18 @@ class CreateOrdersTable extends Migration
             $table->id();
             $table->string('order_id');
             $table->unsignedBigInteger('product_id');
+            $table->string('nama_product');
             $table->unsignedBigInteger('customer_id');
             $table->string('jumlah');
+            $table->integer('harga_beli');
             $table->integer('total_harga');
             $table->integer('uang_bayar');
             $table->integer('kembalian')->default(0);
+            $table->string('jumlah_diskon');
+            $table->enum('jenis_diskon', ['Persentase', 'Rupiah', 'Tanpa Diskon']);
+            $table->string('tanggal_pembelian');
             $table->timestamps();
 
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
         });
     }

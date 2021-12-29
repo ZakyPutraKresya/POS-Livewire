@@ -64,12 +64,44 @@
                     <a class="nav-link dropdown-indicator" href="#category" role="button"
                         data-bs-toggle="collapse" aria-expanded="false" aria-controls="Category">
                         <div class="d-flex align-items-center"><span class="nav-link-icon"><span
-                                    class="fas fa-shopping-bag"></span></span><span
+                                    class="fas fa-clipboard-list"></span></span><span
                                 class="nav-link-text ps-1">Kategori</span>
                         </div>
                     </a>
                     <ul class="nav collapse {{ (request()->is('product/category*')) ? 'show' : 'false' }}" id="category">
                         <li class="nav-item"><a class="nav-link {{ (request()->is('product/category')) ? 'active' : '' }}" href="{{route('category.index')}}"
+                                aria-expanded="false">
+                                <div class="d-flex align-items-center"><span class="nav-link-text ps-1">List Data</span>
+                                </div>
+                            </a>
+                            <!-- more inner pages-->
+                        </li>
+                    </ul>
+                    <a class="nav-link dropdown-indicator" href="#order" role="button"
+                        data-bs-toggle="collapse" aria-expanded="false" aria-controls="Order">
+                        <div class="d-flex align-items-center"><span class="nav-link-icon"><span
+                                    class="fas fa-shopping-cart"></span></span><span
+                                class="nav-link-text ps-1">Orders</span>
+                        </div>
+                    </a>
+                    <ul class="nav collapse {{ (request()->is('orders*')) ? 'show' : 'false' }}" id="order">
+                        <li class="nav-item"><a class="nav-link {{ (request()->is('orders*')) ? 'active' : '' }}" href="{{route('orders.index')}}"
+                                aria-expanded="false">
+                                <div class="d-flex align-items-center"><span class="nav-link-text ps-1">List Data</span>
+                                </div>
+                            </a>
+                            <!-- more inner pages-->
+                        </li>
+                    </ul>
+                    <a class="nav-link dropdown-indicator" href="#customer" role="button"
+                        data-bs-toggle="collapse" aria-expanded="false" aria-controls="Order">
+                        <div class="d-flex align-items-center"><span class="nav-link-icon"><span
+                                    class="fas fa-users"></span></span><span
+                                class="nav-link-text ps-1">Customers</span>
+                        </div>
+                    </a>
+                    <ul class="nav collapse {{ (request()->is('customers*')) ? 'show' : 'false' }}" id="customer">
+                        <li class="nav-item"><a class="nav-link {{ (request()->is('customers*')) ? 'active' : '' }}" href="{{route('customers.index')}}"
                                 aria-expanded="false">
                                 <div class="d-flex align-items-center"><span class="nav-link-text ps-1">List Data</span>
                                 </div>

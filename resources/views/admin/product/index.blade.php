@@ -6,41 +6,6 @@ Product
 <li class="breadcrumb-item active" aria-current="page">Produk</li>
 @endsection
 @section('content')
-<div class="row g-3 mb-3">
-    <div class="col-xxl-6 col-xl-12">
-        <div class="row g-3">
-            <div class="col-12">
-                <div class="card bg-transparent-50 overflow-hidden">
-                    <div class="card-header position-relative">
-                        <div class="bg-holder d-none d-md-block bg-card z-index-1"
-                            style="background-image:url({{asset('template')}}/assets/img/illustrations/ecommerce-bg.png);background-size:230px;background-position:right bottom;z-index:-1;">
-                        </div>
-                        <!--/.bg-holder-->
-
-                        <div class="position-relative z-index-2">
-                            <div>
-                                <h3 class="text-primary mb-1" style="text-transform: capitalize;">{{$jam}},
-                                    {{Auth::user()->name}}!</h3>
-                                <p>Report Total Penjualan Barang dan Penghasilan Selama 1 Minggu </p>
-                            </div>
-                            <div class="d-flex py-3">
-                                <div class="pe-3">
-                                    <p class="text-600 fs--1 fw-medium">Penjualan</p>
-                                    <h4 class="text-800 mb-0">14,209</h4>
-                                </div>
-                                <div class="ps-3">
-                                    <p class="text-600 fs--1">Penghasilan</p>
-                                    <h4 class="text-800 mb-0">Rp. 21.349 </h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 <div class="col-xxl-9 col-md-12">
     <div class="card z-index-1" id="productTable"
         data-list='{"valueNames":["nama","kategori","harga","stok","status"],"page":5,"pagination":true}'>
@@ -317,7 +282,7 @@ Product
                 </div>
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item"><a class="nav-link active" id="home-tab" data-bs-toggle="tab" href="#tab-home"
-                            role="tab" aria-controls="tab-home" aria-selected="true">Jenis dan Stok</a></li>
+                            role="tab" aria-controls="tab-home" aria-selected="true">Kategori</a></li>
                 </ul>
                 <div class="tab-content border-x border-bottom p-3" id="myTabContent">
                     <div class="tab-pane fade show active" id="tab-home" role="tabpanel" aria-labelledby="home-tab">

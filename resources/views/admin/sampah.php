@@ -112,3 +112,6 @@
 </body>
 
 </html>
+
+
+<input type="text" id="inputku" name="angkab" onkeydown="return numbersonly(this, event);" onkeyup="javascript:tandaPemisahTitik(this);" autofocus>

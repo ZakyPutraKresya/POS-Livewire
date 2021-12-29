@@ -3,21 +3,21 @@
 </p>
 
 ## Tentang Aplikasi
-
-Aplikasi POS atau point of sales adalah aplikasi yang digunakan untuk mengelola transaksi pada sebuah toko atau oleh kasir. Aplikasi ini dibuat menggunakan Laravel v8.* dan minimal PHP v7.4 jadi apabila pada saat proses instalasi atau penggunaan terdapat error atau bug kemungkinan karena versi dari PHP yang tidak support.
+Aplikasi POS atau point of sales adalah aplikasi yang digunakan untuk mengelola transaksi pada sebuah toko atau oleh kasir. Aplikasi ini dibuat menggunakan Laravel v8.* dan Laravel Livewire v2.* dan minimal PHP v7.4 jadi apabila pada saat proses instalasi atau penggunaan terdapat error atau bug kemungkinan karena versi dari PHP yang tidak support.
 
 ### Beberapa Fitur yang tersedia:
 - Manajemen Kategori Produk
 - Manajemen Produk
 - Manajemen Customer
 - Manajemen Stok Produk
-- Kasir Interface
+- Kasir Interface (Livewire SPA)
+  - Interface Kasir Dibuat Single Page Application / Tanpa Reload Page!
 - Transaksi Pengeluaran
 - Transaksi Pembelian
 - Transaksi Penjualan
 - Laporan Pendapatan atau Laba & Rugi
-  - Bulanan
-  - Harian
+  - Bulanan *Coming Soon
+  - Harian *Coming Soon
   - Mingguan
 - Manajemen User dan Profil
 - Pengaturan Toko
@@ -25,17 +25,17 @@ Aplikasi POS atau point of sales adalah aplikasi yang digunakan untuk mengelola 
   - Setting Diskon Produk
 - User (Administrator, Kasir)
   - Admin Data Master
-  - Kasir (Input Produk > Keranjang, Pembayaran)
+  - Kasir Menggunakan Laravel Livewire (Input Produk > Keranjang, Pembayaran)
 - Grafik ChartJS pada Dashboard
 
 ## Instalasi
 #### Via Git
 ```bash
-git clone https://github.com/ZakyPutraKresya/RasyPOS
+git clone https://github.com/ZakyPutraKresya/POS-Livewire
 ```
 
 ### Download ZIP
-[Link](https://github.com/ZakyPutraKresya/RasyPOS/archive/refs/heads/master.zip)
+[Link](https://github.com/ZakyPutraKresya/POS-Livewire/archive/refs/heads/master.zip)
 
 ### Setup Aplikasi
 Jalankan perintah 
@@ -67,6 +67,10 @@ APP_KEY=base64:QGRW4K7UVzS2M5HE2ZCLlUuiCtOIzRSfb38iWApkphE=
 APP_DEBUG=true
 APP_URL=http://example-app.test
 ```
+Routing Clear Cache
+```bash
+php artisan route:cache
+```
 Generate key
 ```bash
 php artisan key:generate
@@ -77,7 +81,7 @@ php artisan migrate
 ```
 Seeder table User, Pengaturan
 ```bash
-php artisan db:seed
+php artisan db:seed CreateUsersSeeder
 ```
 Menjalankan aplikasi
 ```bash

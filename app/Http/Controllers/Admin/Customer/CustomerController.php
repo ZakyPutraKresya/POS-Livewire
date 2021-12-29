@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Product;
+namespace App\Http\Controllers\Admin\Customer;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Category;
+use App\Models\Customer;
 use Illuminate\Support\Facades\Validator;
 use Alert;
 use Illuminate\Support\Facades\Crypt;
 
-class CategoryController extends Controller
+class CustomerController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,9 +18,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $data = Category::all();
-
-        return view('admin.product.category.index', compact('data'));
+        $customer = Customer::orderBy('nama', 'ASC')->get();
+        return view('admin.customers.index', compact('customer'));
     }
 
     /**
@@ -42,28 +41,29 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $validasi = array(
-            'kategori' => 'required|unique:categories'
+            'nama' => 'required|unique:customers'
         );
 
         $validator = Validator::make($request->all(), $validasi);
         if ($validator->fails()) {
-            Alert::error('Gagal', 'Data Category Sudah Ada');
-            return redirect()->route('category.index');
+            Alert::error('Gagal', 'Data Pelanggan ini sudah ada');
+            return redirect()->route('customers.index');
 
         } else {
 
-            $tambahdata = Category::create(
+            $tambahdata = Customer::create(
                 [
-                    'kategori' => $request->kategori
+                    'nama' => $request->nama,
+                    'total_belanja' => 0
                 ]
             );
     
             if ($tambahdata){
-                Alert::success('Berhasil', 'Data Category Berhasil Ditambahkan');
-                return redirect()->route('category.index');
+                Alert::success('Berhasil', 'Data Customer Berhasil Ditambahkan');
+                return redirect()->route('customers.index');
             } else {
-                Alert::error('Gagal', 'Data Category Gagal Ditambahkan');
-                return redirect()->route('category.index');
+                Alert::error('Gagal', 'Data Customer Gagal Ditambahkan');
+                return redirect()->route('customers.index');
             }
 
         }
@@ -91,8 +91,8 @@ class CategoryController extends Controller
         // Mengdecrypt id yang dituju atau mendeksripsikan enskripsi yang dituju
         $id = Crypt::decrypt($id);
 
-        $category = Category::where('id', $id)->first();
-        return view('admin.product.category.edit', compact('category'));
+        $customers = Customer::where('id', $id)->first();
+        return view('admin.customers.edit', compact('customers'));
     }
 
     /**
@@ -105,19 +105,33 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
         //get data Blog by ID
-        $category = Category::findOrFail($id);
+        $customer = Customer::findOrFail($id);
 
-        $category->update([
-            'kategori'     => $request->kategori
-        ]);
+        $validasi = array(
+            'nama' => 'required|unique:customers'
+        );
 
-        if ($category) {
-            Alert::success('Berhasil', 'Data Kategori Berhasil Di Update');
-            return redirect()->route('category.index');
+        $validator = Validator::make($request->all(), $validasi);
+        if ($validator->fails()) {
+            Alert::error('Gagal Edit', 'Data Pelanggan ini sudah ada');
+            return redirect()->route('customers.index');
+
         } else {
-            Alert::error('Gagal', 'Data Kategori Gagal Di Update');
-            return redirect()->route('category.index');
+
+            $customer->update([
+                'nama'     => $request->nama
+            ]);
+    
+            if ($customer) {
+                Alert::success('Berhasil', 'Data Pelanggan Berhasil Di Update');
+                return redirect()->route('customers.index');
+            } else {
+                Alert::error('Gagal', 'Data Pelanggan Gagal Di Update');
+                return redirect()->route('customers.index');
+            }
         }
+
+        
     }
 
     /**
@@ -128,9 +142,9 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $category = Category::findorfail($id);
-        $category->delete();
+        $customers = Customer::findorfail($id);
+        $customers->delete();
         Alert::success('Berhasil', 'Data Produk Berhasil Dihapus');
-        return redirect()->route('category.index');
+        return redirect()->route('customers.index');
     }
 }

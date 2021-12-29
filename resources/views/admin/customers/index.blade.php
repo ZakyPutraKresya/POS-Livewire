@@ -1,14 +1,14 @@
 @extends('layouts.template')
 @section('title_page')
-Kategori
+Customer
 @endsection
 @section('breadcrumbs')
-<li class="breadcrumb-item active" aria-current="page">Kategori</li>
+<li class="breadcrumb-item active" aria-current="page">Pelanggan</li>
 @endsection
 @section('content')
 <div class="col-xxl-9 col-md-12">
     <div class="card z-index-1" id="categoryTable"
-        data-list='{"valueNames":["kategori"],"page":5,"pagination":true}'>
+        data-list='{"valueNames":["nama", "total_belanja"],"page":5,"pagination":true}'>
         <div class="card-header">
             <div class="row flex-between-center">
                 <div class="col-6 col-sm-auto d-flex align-items-center pe-0">
@@ -49,16 +49,17 @@ Kategori
                             <table class="table table-bordered table-striped fs--1 mb-0">
                                 <thead class="bg-200 text-900">
                                     <tr>
-                                        <th class="sort pe-1 align-middle white-space-nowrap" data-sort="kategori">Nama
-                                            Kategori</th>
+                                        <th class="sort pe-1 align-middle white-space-nowrap" data-sort="nama">Nama Pelanggan</th>
+                                        <th class="sort pe-1 align-middle white-space-nowrap" data-sort="total_belanja">Total Belanja</th>
                                         <th class="no-sort pe-1 align-middle white-space-nowrap data-table-row-action text-center">
                                             Action</th>
                                     </tr>
                                 </thead>
                                 <tbody class="list">
-                                    @forelse($data as $dt => $val)
+                                    @forelse($customer as $val)
                                     <tr class="btn-reveal-trigger">
-                                        <th class="align-middle white-space-nowrap kategori">{{$val->kategori}}</a></th>
+                                        <th class="align-middle white-space-nowrap nama">{{$val->nama}}</th>
+                                        <th class="align-middle white-space-nowrap total_belanja">Rp. {{Str::currency($val->total_belanja)}}</th>
                                         
 
                                             <td class="align-middle white-space-nowrap text-end">
@@ -71,10 +72,11 @@ Kategori
                                                             class="fas fa-ellipsis-h fs--1"></span></button>
                                                     <div class="dropdown-menu dropdown-menu-end border py-2"
                                                         aria-labelledby="dropdown13"><a class="dropdown-item"
-                                                            href="{{route('category.edit', Crypt::encrypt($val->id))}}">Edit</a>
+                                                            href="{{route('customers.show', Crypt::encrypt($val->id))}}">History Pembelian</a><a class="dropdown-item"
+                                                            href="{{route('customers.edit', Crypt::encrypt($val->id))}}">Edit</a>
                                                         <div class="dropdown-divider"></div>
 
-                                                        <form action="{{ route('category.destroy', $val->id) }}"
+                                                        <form action="{{ route('customers.destroy', $val->id) }}"
                                                             method="post">
                                                             @csrf
                                                             @method('delete')
@@ -133,19 +135,19 @@ Kategori
                     aria-label="Close"></button>
             </div>
             <div class="modal-body py-4 px-5">
-                <form class="needs-validation" novalidate="" method="post" action="{{route('category.store')}}">
+                <form class="needs-validation" novalidate="" method="post" action="{{route('customers.store')}}">
                     @csrf
                     <div class="row gx-2">
                         <div class="mb-3 col-sm-12 position-relative">
-                            <label class="form-label" for="modal-nama-kategori">Kategori</label>
-                            <input class="form-control" required="" placeholder="Masukkan Nama Kategori"
-                                type="nama-kategori" name="kategori" autocomplete="on" id="modal-nama-kategori" />
-                            <div class="invalid-tooltip">Masukkan Nama Kategori Dahulu</div>
+                            <label class="form-label" for="modal-nama">Nama Pelanggan</label>
+                            <input class="form-control" required="" placeholder="Masukkan Nama Pelanggan"
+                                type="nama" name="nama" autocomplete="on" id="modal-nama" />
+                            <div class="invalid-tooltip">Masukkan Nama Pelanggan Dahulu</div>
                         </div>
                     </div>
 
                     <div class="mb-3">
-                        <button class="btn btn-primary d-block w-100 mt-3" type="submit" name="submit">Tambah</button>
+                        <button class="btn btn-primary d-block w-100 mt-3" type="submit" name="submit">Tambah Data</button>
                     </div>
                 </form>
             </div>

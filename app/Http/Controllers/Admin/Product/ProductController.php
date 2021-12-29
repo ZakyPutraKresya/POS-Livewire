@@ -8,6 +8,8 @@ use App\Models\Product;
 use Alert;
 use App\Models\Category;
 use Illuminate\Support\Facades\Crypt;
+use Carbon\Carbon;
+use App\Models\Order;
 
 class ProductController extends Controller
 {
@@ -18,25 +20,12 @@ class ProductController extends Controller
      */
     public function index()
     {
-        date_default_timezone_set('Asia/Jakarta');
-        $jam = "";
-        $time = date("H");
-        /* If the time is less than 1200 hours, show good morning */
-        if($time >= "00" && $time < "04") {
-            $jam = "Selamat Malam";
-        } else if ($time >= "04" && $time < "12") {
-            $jam = "Selamat Pagi";
-        } else if ($time >= "12" && $time < "17") {
-            $jam = "Selamat Siang";
-        } else if ($time >= "17" && $time < "19") {
-            $jam = "Selamat Sore";
-        } else if ($time >= "19") {
-            $jam = "Selamat Malam";
-        }
+        
         $category = Category::all();
         $product = Product::all();
+        
 
-        return view('admin.product.index', compact('product', 'jam', 'category'));
+        return view('admin.product.index', compact('product', 'category'));
     }
 
     /**
@@ -105,7 +94,12 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        // Mengdecrypt id yang dituju atau mendeksripsikan enskripsi yang dituju
+        $id = Crypt::decrypt($id);
+
+        $products = Product::where('id', $id)->first();
+        $category = Category::all();
+        return view('admin.product.edit', compact('products', 'category'));
     }
 
     /**
@@ -117,7 +111,25 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //get data Blog by ID
+        $product = Product::findOrFail($id);
+
+        $product->update([
+            'nama'     => $request->nama,
+            'kategori_id'   => $request->kategori_id,
+            'harga' => $request->harga,
+            'harga_modal' => $request->harga_modal,
+            'stok' => $request->stok,
+            'jenis' => $request->jenis
+        ]);
+
+        if ($product) {
+            Alert::success('Berhasil', 'Data Produk Berhasil Di Update');
+            return redirect()->route('product.index');
+        } else {
+            Alert::error('Gagal', 'Data Produk Gagal Di Update');
+            return redirect()->route('product.index');
+        }
     }
 
     /**

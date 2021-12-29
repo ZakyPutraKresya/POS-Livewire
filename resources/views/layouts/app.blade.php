@@ -12,10 +12,12 @@
     <link rel="icon" type="image/png" sizes="32x32" href="assets/images/logos/squanchy.jpg">
     <!-- jQuery -->
     <!-- Bootstrap4 files-->
+<link href="{{ asset('template')}}/assets/css/theme.min.css" rel="stylesheet" id="style-default">
     <link href="assets/css/bootstrap.css" rel="stylesheet" type="text/css" />
     <link href="assets/css/ui.css" rel="stylesheet" type="text/css" />
     <link href="assets/fonts/fontawesome/css/fontawesome-all.min.css" type="text/css" rel="stylesheet">
     <link href="assets/css/OverlayScrollbars.css" type="text/css" rel="stylesheet" />
+    <link href="{{ asset('template')}}/vendors/choices/choices.min.css" rel="stylesheet" />
     <!-- Font awesome 5 -->
     <style>
         .avatar {
@@ -79,7 +81,9 @@
     @livewire('cart');
     <script src="assets/js/jquery-2.0.0.min.js" type="text/javascript"></script>
     <script src="assets/js/bootstrap.bundle.min.js" type="text/javascript"></script>
+    <script src="{{ asset('template')}}/vendors/bootstrap/bootstrap.min.js"></script>
     <script src="assets/js/OverlayScrollbars.js" type="text/javascript"></script>
+    <script src="assets/js/auto-titik.js" type="text/javascript"></script>
     <script>
         $(function () {
             //The passed argument has to be at least a empty object or a object with your desired options
@@ -95,32 +99,32 @@
             $("#cart").overlayScrollbars({});
         });
     </script>
-    <script type="text/javascript">
-    $(".update-cart").change(function (e) {
-        e.preventDefault();
-
-        var ele = $(this);
-
-        $.ajax({
-            url: '{{ route('edit.cart') }}',
-            method: "patch",
-            data: {
-                _token: '{{ csrf_token() }}',
-                id: ele.parents("tr").attr("data-id"),
-                quantity: ele.parents("tr").find(".quantity").val()
-            },
-            success: function (response) {
-                window.location.reload();
-            }
-        });
-    });
-    </script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         window.addEventListener('swal', function(e){
             Swal.fire(e.detail);
         });
     </script>
+    <!-- <script>
+        window.addEventListener('tambah-diskon', event =>{
+            $('#tambah-diskon').modal('show');
+        });
+    </script> -->
+    <script src="{{ asset('template')}}/vendors/choices/choices.min.js"></script>
+    <script>
+        $('#checkout').on('shown.bs.modal', function () {
+            $('#inputku').focus();
+        })
+    </script>
+<!-- ===============================================-->
+<!--    JavaScripts-->
+<!-- ===============================================-->
+
+<script src="{{ asset('template')}}/vendors/bootstrap/bootstrap.min.js"></script>
+<script src="{{ asset('template')}}/vendors/anchorjs/anchor.min.js"></script>
+<script src="{{ asset('template')}}/vendors/lodash/lodash.min.js"></script>
+<script src="{{ asset('template')}}/vendors/list.js/list.min.js"></script>
+<script src="{{ asset('template')}}/assets/js/theme.js"></script>
     @livewireScripts
 </body>
 
