@@ -42,8 +42,8 @@ class OrderController extends Controller
         $penjualanBarang = 0;
         $pendapatanKotor = 0;
   
-        $tujuhHari =  Order::where('created_at', '>=', $date)->select('order_id', 'customer_id', 'total_harga', 'tanggal_pembelian', 'jumlah')->groupBy('order_id', 'customer_id', 'total_harga', 'tanggal_pembelian', 'jumlah')->get();
-        $penghasilan = Order::where('created_at', '>=', $date)->select('order_id', 'customer_id', 'total_harga', 'tanggal_pembelian')->groupBy('order_id', 'customer_id', 'total_harga', 'tanggal_pembelian')->orderBy('tanggal_pembelian', 'DESC')->get();
+        $tujuhHari =  Order::where('created_at', '>=', Carbon::now()->subDays(7))->get();
+        $penghasilan = Order::where('created_at', '>=', Carbon::now()->subDays(7))->select('order_id', 'customer_id', 'total_harga', 'tanggal_pembelian')->groupBy('order_id', 'customer_id', 'total_harga', 'tanggal_pembelian')->orderBy('tanggal_pembelian', 'DESC')->get();
         
         foreach ($penghasilan as $key) {
             $pendapatanKotor += $key->total_harga;
@@ -53,6 +53,7 @@ class OrderController extends Controller
             $penjualanBarang += $value->jumlah;
             
         }
+
 
         return view('admin.orders.index', compact('orders', 'customer', 'jam', 'penjualanBarang', 'pendapatanKotor'));
     }

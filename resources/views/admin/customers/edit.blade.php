@@ -1,6 +1,6 @@
 @extends('layouts.template')
 @section('title_page')
-Kategori
+Edit Pelanggan
 @endsection
 @section('breadcrumbs')
 <li class="breadcrumb-item"><a href="{{route('customers.index')}}">Pelanggan</a></li>

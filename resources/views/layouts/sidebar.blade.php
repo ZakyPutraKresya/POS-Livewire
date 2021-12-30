@@ -23,7 +23,7 @@
         <div class="navbar-vertical-content scrollbar">
             <ul class="navbar-nav flex-column mb-3" id="navbarVerticalNav">
                 <li class="nav-item">
-                    <!-- parent pages--><a class="nav-link {{ (request()->is('home')) ? 'active' : '' }}" id="admin-das" href="{{route('home')}}">
+                    <!-- parent pages--><a class="nav-link {{ (request()->is('admin/dashboard')) ? 'active' : '' }}" id="admin-das" href="{{route('home')}}">
                         <div class="d-flex align-items-center"><span class="nav-link-icon"><span
                                     class="fas fa-chart-pie"></span></span><span
                                 class="nav-link-text ps-1">Dashboard</span>

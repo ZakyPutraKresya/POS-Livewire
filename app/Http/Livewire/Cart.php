@@ -290,7 +290,7 @@ class Cart extends Component
         date_default_timezone_set('Asia/Jakarta');
         $jam = "";
         $time = date("d-m-Y H:i:s");
-        $resi = "TS-".date("dm-His");
+        $resi = "TS-".date("dmHis-y");
 
         $grandTotal = 0;
         $total = 0;

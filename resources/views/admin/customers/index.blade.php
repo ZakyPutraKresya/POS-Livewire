@@ -1,6 +1,6 @@
 @extends('layouts.template')
 @section('title_page')
-Customer
+Pelanggan
 @endsection
 @section('breadcrumbs')
 <li class="breadcrumb-item active" aria-current="page">Pelanggan</li>

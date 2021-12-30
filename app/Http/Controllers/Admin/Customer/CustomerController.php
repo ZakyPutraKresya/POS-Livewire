@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Customer;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Customer;
+use App\Models\Order;
 use Illuminate\Support\Facades\Validator;
 use Alert;
 use Illuminate\Support\Facades\Crypt;
@@ -77,7 +78,10 @@ class CustomerController extends Controller
      */
     public function show($id)
     {
-        //
+        $id = Crypt::decrypt($id);
+        $customer = Customer::where('id', $id)->first();
+        $orders = Order::where('customer_id', $id)->select('order_id', 'total_harga', 'tanggal_pembelian')->groupBy('order_id', 'total_harga', 'tanggal_pembelian')->orderBy('tanggal_pembelian', 'DESC')->get();
+        return view('admin.customers.show', compact('customer', 'orders'));
     }
 
     /**

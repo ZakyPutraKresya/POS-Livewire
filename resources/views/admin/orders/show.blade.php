@@ -14,6 +14,7 @@ Order Detail
     <!--/.bg-holder-->
 
     <div class="card-body position-relative">
+        <h5 class="mb-1">Nama Pembeli: {{$tgl_beli->customer->nama}}</h5>
         <h5>Order Details: #{{$resi}}</h5>
         <p class="fs--1">{{$tgl_beli->tanggal_pembelian}}</p>
         <div><strong class="me-2">Status: </strong>
